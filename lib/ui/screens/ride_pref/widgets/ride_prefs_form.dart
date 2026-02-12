@@ -7,6 +7,8 @@ import '../../../widgets/inputs/input_passenger.dart';
 import '../../../widgets/display/bla_divider.dart';
 import '../../../widgets/actions/bla_button.dart';
 import '../../../widgets/actions/bla_switch.dart';
+import '../location_picker_screen.dart';
+import '../../../../utils/animations_util.dart';
 
 ///
 /// A Ride Preference From is a view to select:
@@ -65,6 +67,23 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // Compute the widgets rendering
   // ----------------------------------
 
+  Future<void> _openLocationPicker(LocationType type) async {
+    final Location? selectedLocation = await Navigator.push<Location>(
+      context,
+      AnimationUtils.createBottomToTopRoute(const LocationPickerScreen()),
+    );
+
+    if (selectedLocation == null) return;
+
+    setState(() {
+      if (type == LocationType.departure) {
+        departure = selectedLocation;
+      } else {
+        arrival = selectedLocation;
+      }
+    });
+  }
+
   // ----------------------------------
   // Build the widgets
   // ----------------------------------
@@ -76,22 +95,21 @@ class _RidePrefFormState extends State<RidePrefForm> {
       children: [
         InputLocation(
           location: departure,
-          onPressed: () {},
+          onPressed: () => _openLocationPicker(LocationType.departure),
           type: LocationType.departure,
           trailingIcon: BlaSwitch(onPressed: onSwitch),
         ),
         BlaDivider(),
         InputLocation(
           location: arrival,
-          onPressed: () {},
+          onPressed: () => _openLocationPicker(LocationType.arrival),
           type: LocationType.arrival,
-          trailingIcon: BlaSwitch(onPressed: onSwitch),
         ),
         BlaDivider(),
         InputDate(date: departureDate, onPressed: () {}),
         BlaDivider(),
         InputPassenger(passenger: requestedSeats, onPressed: () {}),
-        BlaButton(isPrimary: true, text: "Search", onPressed: () {}),
+        BlaButton(isPrimary: true, text: "Search", onPressed: arrival == null || departure == null ? null : (){},),
       ],
     );
   }

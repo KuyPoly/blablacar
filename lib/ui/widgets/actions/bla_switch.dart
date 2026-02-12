@@ -9,7 +9,7 @@ class BlaSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.swap_vert, color: BlaColors.iconLight,),
+      icon: Icon(Icons.swap_vert, color: BlaColors.primary,),
       onPressed: onPressed,
     );
   }
