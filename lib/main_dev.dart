@@ -1,3 +1,5 @@
+import 'package:blabla/ui/screens/home/view_model/home_view_model.dart';
+
 import 'data/repositories/location/location_repository.dart';
 import 'data/repositories/location/location_repository_mock.dart';
 import 'data/repositories/ride/ride_repository.dart';
@@ -25,6 +27,8 @@ List<SingleChildWidget> get devProviders {
     ChangeNotifierProvider<RidePreferenceState>(
       create: (_) => RidePreferenceState(repo: RidePreferencesRepositoryMock()),
     ),
+
+    ChangeNotifierProvider<HomeViewModel>(create: (_) => HomeViewModel()),
   ];
 }
 
