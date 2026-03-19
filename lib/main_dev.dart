@@ -7,6 +7,7 @@ import 'data/repositories/ride_preference/ride_preference_repository_mock.dart';
 import 'main_common.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'ui/states/ride_preference_state.dart';
 
 List<SingleChildWidget> get devProviders {
   return [
@@ -19,6 +20,10 @@ List<SingleChildWidget> get devProviders {
     // Ride preferences repository
     Provider<RidePreferencesRepository>(
       create: (_) => RidePreferencesRepositoryMock(),
+    ),
+
+    ChangeNotifierProvider<RidePreferenceState>(
+      create: (_) => RidePreferenceState(repo: RidePreferencesRepositoryMock()),
     ),
   ];
 }

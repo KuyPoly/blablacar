@@ -1,5 +1,5 @@
-import 'package:blabla/model/ride_pref/ride_pref.dart';
-import 'package:blabla/services/ride_prefs_service.dart';
+import '../../../model/ride_pref/ride_pref.dart';
+import '../../../services/ride_prefs_service.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/animations_util.dart';
 import '../../theme/theme.dart';
@@ -37,7 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(context) {
-    return Stack(children: [_buildBackground(), _buildForeground()]);
+    return Scaffold(
+      body: Stack(children: [_buildBackground(), _buildForeground()]),
+    );
   }
 
   Widget _buildForeground() {
